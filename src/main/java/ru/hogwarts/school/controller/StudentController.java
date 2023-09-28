@@ -33,7 +33,11 @@ public class StudentController {
         studentService.delete(id);
     }
     @GetMapping
-    public List<Student> getAllStudents(@RequestParam("age") int age) {
-        return studentService.getByAge(age);
+    public List<Student> getAllStudents() {
+        return studentService.getAllStudents();
+    }
+    @GetMapping
+    public List<Student> getStudentsByAge(@RequestParam("age") int age) {
+        return studentService.findByAge(age);
     }
 }

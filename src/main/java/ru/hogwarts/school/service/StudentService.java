@@ -13,5 +13,7 @@ public interface StudentService {
 
     void delete(Long id);
 
-    List<Student> getByAge(int age);
+    List<Student> getAllStudents();
+
+    List<Student> findByAge(int age);
 }

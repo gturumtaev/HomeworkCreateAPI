@@ -32,7 +32,11 @@ public class FacultyController {
         facultyService.delete(id);
     }
     @GetMapping
-    public List<Faculty> getAllFaculties(@RequestParam("color") String color) {
-        return facultyService.getByColor(color);
+    public List<Faculty> getAllFaculties() {
+        return facultyService.getAllFaculties();
+    }
+    @GetMapping
+    public List<Faculty> getFacultiesByColor(@RequestParam("color") String color) {
+        return facultyService.findByColor(color);
     }
 }
