@@ -35,7 +35,7 @@ public class FacultyController {
     public List<Faculty> getAllFaculties() {
         return facultyService.getAllFaculties();
     }
-    @GetMapping
+    @GetMapping("/allByColor")
     public List<Faculty> getFacultiesByColor(@RequestParam("color") String color) {
         return facultyService.findByColor(color);
     }
