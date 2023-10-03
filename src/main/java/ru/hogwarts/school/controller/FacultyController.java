@@ -32,11 +32,10 @@ public class FacultyController {
         facultyService.delete(id);
     }
     @GetMapping
-    public List<Faculty> getAllFaculties() {
+    public List<Faculty> findFaculties(@RequestParam (required = false) String color) {
+        if (color != null && !color.isBlank()) {
+            return facultyService.findByColorIgnoreCase(color);
+        }
         return facultyService.getAllFaculties();
-    }
-    @GetMapping("/allByColor")
-    public List<Faculty> getFacultiesByColor(@RequestParam("color") String color) {
-        return facultyService.findByColor(color);
     }
 }
