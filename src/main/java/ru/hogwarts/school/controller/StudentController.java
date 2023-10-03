@@ -45,8 +45,8 @@ public class StudentController {
         }
         return studentService.getAllStudents();
     }
-    @GetMapping("{id}/faculty")
-    public Faculty getFacultyByStudentId(@PathVariable Long id) {
-        return (Faculty) studentService.findByFacultyId(id);
+    @GetMapping("/faculty")
+    public Faculty getFacultyByStudentId(@RequestParam Long id) {
+        return (Faculty) studentService.getByFacultyId(id);
     }
 }

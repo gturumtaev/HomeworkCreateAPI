@@ -5,17 +5,22 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.service.FacultyService;
+import ru.hogwarts.school.service.StudentService;
 
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FacultyServiceImpl implements FacultyService {
     private final FacultyRepository facultyRepository;
+    private final StudentService studentService;
 
-    public FacultyServiceImpl(FacultyRepository facultyRepository) {
+    public FacultyServiceImpl(FacultyRepository facultyRepository, StudentService studentService) {
         this.facultyRepository = facultyRepository;
+        this.studentService = studentService;
     }
+
 
     @Override
     public Faculty add(Faculty faculty) {
@@ -40,14 +45,20 @@ public class FacultyServiceImpl implements FacultyService {
     public List<Faculty> getAllFaculties() {
         return facultyRepository.findAll();
     }
-
-    @Override
-    public List<Faculty> findByColor(String color) {
-        return facultyRepository.findByColor(color);
-    }
     @Override
     public List<Faculty> findByColorIgnoreCase(String color) {
         return facultyRepository.findByColorIgnoreCase(color);
     }
 
+    @Override
+    public Set<Faculty> getByColorOrNameIgnoreCase(String param) {
+        Set<Faculty> result = new HashSet<>();
+        result.addAll(facultyRepository.findByColorIgnoreCase(param));
+        result.addAll(facultyRepository.findByNameIgnoreCase(param));
+        return result;
+    }
+    @Override
+    public List<Student> getStudentsByFacultyId(Long id) {
+        return studentService.getByFacultyId(id);
+    }
 }

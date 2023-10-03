@@ -1,5 +1,6 @@
 package ru.hogwarts.school.service;
 
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 
 import java.util.Collection;
@@ -19,5 +20,7 @@ public interface StudentService {
     List<Student> findByAge(int age);
 
     List<Student> findByAgeBetween(int min, int max);
-    Collection<Student> findByFacultyId(Long id);
+    List<Student> getByFacultyId(Long id);
+
+    Faculty getFacultyByStudentId(Long id);
 }
