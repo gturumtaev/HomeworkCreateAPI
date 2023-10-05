@@ -1,8 +1,8 @@
 package ru.hogwarts.school.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.entity.Faculty;
+import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.StudentService;
 
@@ -17,19 +17,24 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student add(Student student) {
-        return studentRepository.save(student);
+    public Student add(String name, int age) {
+        Student newStudent = new Student(name, age);
+        newStudent = studentRepository.save(newStudent);
+        return newStudent;
     }
     @Override
-    public Student get(Long id) {
+    public Student get(long id) {
         return studentRepository.findById(id).get();
     }
     @Override
-    public Student update(Long id, Student student) {
-        return studentRepository.save(student);
+    public Student update(long id, String name, int age) {
+        Student studentForUpdate = studentRepository.findById(id).get();
+        studentForUpdate.setName(name);
+        studentForUpdate.setAge(age);
+        return studentRepository.save(studentForUpdate);
     }
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         studentRepository.deleteById(id);
     }
     @Override
@@ -46,13 +51,13 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findByAgeBetween(int min, int max) {
         return studentRepository.findByAgeBetween(min, max);
     }
-
     @Override
-    public List<Student> getByFacultyId(Long id) {
-        return studentRepository.findByFacultyId(id);
-    }
-    @Override
-    public Faculty getFacultyByStudentId(Long id) {
+    public Faculty getFacultyByStudentId(long id) {
         return studentRepository.findById(id).get().getFaculty();
     }
+    @Override
+    public List<Student> getByFacultyId(long facultyId) {
+        return studentRepository.findByFacultyId(facultyId);
+    }
+
 }

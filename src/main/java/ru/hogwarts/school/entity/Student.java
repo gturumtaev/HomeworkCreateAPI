@@ -1,23 +1,21 @@
-package ru.hogwarts.school.model;
+package ru.hogwarts.school.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Entity
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String name;
     private int age;
-
-
-
     @ManyToOne
-    @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
-    public Student(Long id, String name, int age) {
-        this.id = id;
+    public Student(String name, int age) {
         this.name = name;
         this.age = age;
     }

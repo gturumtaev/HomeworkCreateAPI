@@ -1,8 +1,8 @@
 package ru.hogwarts.school.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.entity.Faculty;
+import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.service.FacultyService;
 
 import java.util.List;
@@ -21,31 +21,33 @@ public class FacultyController {
         return facultyService.get(id);
     }
     @PostMapping
-    public Faculty add(@RequestBody Faculty faculty) {
-        return facultyService.add(faculty);
+    public Faculty add(@RequestParam String name,
+                       @RequestParam String color) {
+        return facultyService.add(name, color);
     }
     @PutMapping("{id}")
     public Faculty update(@PathVariable("id") Long id,
-                          @RequestBody Faculty faculty) {
-        return facultyService.update(id, faculty);
+                          @RequestParam String name,
+                          @RequestParam String color) {
+        return facultyService.update(id, name, color);
     }
     @DeleteMapping("{id}")
     void delete(@PathVariable("id") Long id) {
         facultyService.delete(id);
     }
     @GetMapping
-    public List<Faculty> findFaculties(@RequestParam (required = false) String color) {
+    public List<Faculty> getFaculties(@RequestParam (required = false) String color) {
         if (color != null && !color.isBlank()) {
-            return facultyService.findByColorIgnoreCase(color);
+            return facultyService.getByColorIgnoreCase(color);
         }
         return facultyService.getAllFaculties();
     }
-    @GetMapping("/name-or-color")
+    @GetMapping("/by-name-or-color")
     public Set<Faculty> getByColorOrNameIgnoreCase(@RequestParam String param) {
         return facultyService.getByColorOrNameIgnoreCase(param);
     }
 
-    @GetMapping("/students-faculty-id")
+    @GetMapping("/students-by-faculty-id")
     public List<Student> getStudentsByFacultyId(@RequestParam Long id) {
         return facultyService.getStudentsByFacultyId(id);
     }

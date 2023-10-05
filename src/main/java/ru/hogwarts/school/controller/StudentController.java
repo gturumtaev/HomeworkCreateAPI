@@ -1,8 +1,8 @@
 package ru.hogwarts.school.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.entity.Faculty;
+import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.List;
@@ -21,13 +21,15 @@ public class StudentController {
         return studentService.get(id);
     }
     @PostMapping
-    public Student add(@RequestBody Student student) {
-        return studentService.add(student);
+    public Student add(@RequestParam String name,
+                       @RequestParam int age) {
+        return studentService.add(name, age);
     }
     @PutMapping("{id}")
     public Student update(@PathVariable("id") Long id,
-                          @RequestBody Student student) {
-        return studentService.update(id, student);
+                          @RequestParam String name,
+                          @RequestParam int age) {
+        return studentService.update(id, name, age);
     }
     @DeleteMapping("{id}")
     void delete(@PathVariable("id") Long id) {
@@ -45,8 +47,8 @@ public class StudentController {
         }
         return studentService.getAllStudents();
     }
-    @GetMapping("/faculty")
+    @GetMapping("/faculty-by-student-id")
     public Faculty getFacultyByStudentId(@RequestParam Long id) {
-        return (Faculty) studentService.getByFacultyId(id);
+        return studentService.getFacultyByStudentId(id);
     }
 }

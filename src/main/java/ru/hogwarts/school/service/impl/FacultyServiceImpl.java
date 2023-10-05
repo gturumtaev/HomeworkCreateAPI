@@ -1,8 +1,8 @@
 package ru.hogwarts.school.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.entity.Faculty;
+import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.service.FacultyService;
 import ru.hogwarts.school.service.StudentService;
@@ -20,36 +20,36 @@ public class FacultyServiceImpl implements FacultyService {
         this.facultyRepository = facultyRepository;
         this.studentService = studentService;
     }
-
-
     @Override
-    public Faculty add(Faculty faculty) {
-        return facultyRepository.save(faculty);
+    public Faculty add(String name, String color) {
+        Faculty newFaculty = new Faculty(name, color);
+        newFaculty = facultyRepository.save(newFaculty);
+        return newFaculty;
     }
-
     @Override
-    public Faculty get(Long id) {
+    public Faculty get(long id) {
         return facultyRepository.findById(id).get();
     }
-
     @Override
-    public Faculty update(Long id, Faculty faculty) {
-        return facultyRepository.save(faculty);
+    public Faculty update(long id, String name, String color) {
+        Faculty facultyForUpdate = facultyRepository.findById(id).get();
+        facultyForUpdate.setName(name);
+        facultyForUpdate.setColor(color);
+        return facultyRepository.save(facultyForUpdate);
     }
-
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         facultyRepository.deleteById(id);
     }
     @Override
     public List<Faculty> getAllFaculties() {
         return facultyRepository.findAll();
     }
+
     @Override
-    public List<Faculty> findByColorIgnoreCase(String color) {
+    public List<Faculty> getByColorIgnoreCase(String color) {
         return facultyRepository.findByColorIgnoreCase(color);
     }
-
     @Override
     public Set<Faculty> getByColorOrNameIgnoreCase(String param) {
         Set<Faculty> result = new HashSet<>();
@@ -58,7 +58,7 @@ public class FacultyServiceImpl implements FacultyService {
         return result;
     }
     @Override
-    public List<Student> getStudentsByFacultyId(Long id) {
+    public List<Student> getStudentsByFacultyId(long id) {
         return studentService.getByFacultyId(id);
     }
 }
