@@ -23,4 +23,13 @@ public class AvatarController {
         avatarService.uploadAvatar(studentId, avatar);
         return ResponseEntity.ok().build();
     }
+    @GetMapping(value = "/student/{id}/avatar-from-db")
+    public ResponseEntity<byte[]> downloadAvatarFromDb(@PathVariable Long id) {
+        return avatarService.downloadAvatarByStudentFromDb(id);
+    }
+
+    @GetMapping(value = "/student/{id}/avatar-from-file")
+    public void downloadAvatarFromFileSystem(@PathVariable Long id, HttpServletResponse response) throws IOException{
+        avatarService.downloadAvatarFromFileSystem(id, response);
+    }
 }

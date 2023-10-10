@@ -24,6 +24,7 @@ import java.util.Optional;
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 @Service
+@Transactional
 public class AvatarServiceImpl implements AvatarService {
     private final StudentRepository studentRepository;
     private final AvatarRepository avatarRepository;
@@ -54,8 +55,6 @@ public class AvatarServiceImpl implements AvatarService {
         ) {
             bis.transferTo(bos);
         }
-
-        //Запись в БД
         Avatar avatar = new Avatar();
         avatar.setStudent(student);
         avatar.setFilePath(filePath.toString());
@@ -67,5 +66,32 @@ public class AvatarServiceImpl implements AvatarService {
 
     private String getExtensions(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+    public ResponseEntity<byte[]> downloadAvatarByStudentFromDb(Long studentId) {
+        Optional<Avatar> avatarOpt = avatarRepository.findByStudentId(studentId);
+        if (avatarOpt.isEmpty()) {
+            return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
+        }
+        Avatar avatar = avatarOpt.get();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType(avatar.getMediaType()));
+        headers.setContentLength(avatar.getData().length);
+        return ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
+    }
+
+    public void downloadAvatarFromFileSystem(Long studentId, HttpServletResponse response) throws IOException {
+        Optional<Avatar> avatarOpt = avatarRepository.findByStudentId(studentId);
+        if (avatarOpt.isEmpty()) {
+            return;
+        }
+        Avatar avatar = avatarOpt.get();
+        Path path = Path.of(avatar.getFilePath());
+        try (InputStream is = Files.newInputStream(path);
+             OutputStream os = response.getOutputStream();) {
+            response.setStatus(200);
+            response.setContentType(avatar.getMediaType());
+            response.setContentLength((int) avatar.getFileSize());
+            is.transferTo(os);
+        }
     }
 }
