@@ -6,7 +6,7 @@ import ru.hogwarts.school.entity.Student;
 import java.util.List;
 
 public interface StudentService {
-    Student add(String name, int age);
+    Student add(Student student);
 
     Student get(long id);
 

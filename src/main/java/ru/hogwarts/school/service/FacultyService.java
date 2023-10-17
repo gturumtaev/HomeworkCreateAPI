@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface FacultyService {
-    Faculty add(String name, String color);
+    Faculty add(Faculty faculty);
 
     Faculty get(long id);
 

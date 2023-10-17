@@ -17,8 +17,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student add(String name, int age) {
-        Student newStudent = new Student(name, age);
+    public Student add(Student student) {
+        Student newStudent = new Student(student);
         newStudent = studentRepository.save(newStudent);
         return newStudent;
     }

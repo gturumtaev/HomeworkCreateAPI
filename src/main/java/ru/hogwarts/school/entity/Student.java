@@ -1,6 +1,10 @@
 package ru.hogwarts.school.entity;
 
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -19,6 +23,10 @@ public class Student {
         this.id = id;
         this.name = name;
         this.age = age;
+    }
+
+    public Student(Student student) {
+
     }
 
     public Student() {

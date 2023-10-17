@@ -1,9 +1,9 @@
 package ru.hogwarts.school.controller;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -100,7 +100,7 @@ class StudentControllerMVCTest {
         Student student1 = new Student(1L, "Гарри Поттер", 11);
         Faculty faculty1 = new Faculty(1L,"Гриффиндор", "Красно-золотой");
         student1.setFaculty(faculty1);
-        when(studentRepository.findByFacultyId(anyLong())).thenReturn(Optional.of(student1));
+        when(studentRepository.findByFacultyId(any(Long.class))).thenReturn(Optional.of(student1));
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/student/faculty-by-student-id")
                         .param("id", "1")

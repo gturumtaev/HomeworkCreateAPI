@@ -27,7 +27,11 @@ public class Faculty {
         this.color = color;
     }
 
+    public Faculty(Faculty faculty) {
+    }
+
     public Faculty() {
+
     }
 
     public Long getId() {

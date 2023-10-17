@@ -21,9 +21,8 @@ public class FacultyController {
         return facultyService.get(id);
     }
     @PostMapping
-    public Faculty add(@RequestParam String name,
-                       @RequestParam String color) {
-        return facultyService.add(name, color);
+    public Faculty add(@RequestBody Faculty faculty) {
+        return facultyService.add(faculty);
     }
     @PutMapping("{id}")
     public Faculty update(@PathVariable("id") Long id,

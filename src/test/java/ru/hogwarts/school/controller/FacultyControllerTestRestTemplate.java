@@ -37,7 +37,7 @@ class FacultyControllerTestRestTemplate {
 
     @Test
     void get_success() {
-        Faculty facultyForAdd = new Faculty("Грифиндор", "Красно-золотой");
+        Faculty facultyForAdd = new Faculty(1L, "Грифиндор", "Красно-золотой");
         Faculty postedFaculty = this.restTemplate.postForObject("http://localhost:" + port + "/faculty", facultyForAdd, Faculty.class);
         Faculty actualFacultyOpt = this.restTemplate.getForObject("http://localhost:"
                 + port + "/faculty" + "?id=" + postedFaculty.getId(), Faculty.class);
@@ -46,15 +46,15 @@ class FacultyControllerTestRestTemplate {
 
     @Test
     void add_success() {
-        Faculty facultyForAdd = new Faculty("Грифиндор", "Красно-золотой");
-        Faculty expectedFaculty = new Faculty("Грифиндор", "Красно-золотой");
+        Faculty facultyForAdd = new Faculty(1L, "Грифиндор", "Красно-золотой");
+        Faculty expectedFaculty = new Faculty(1L, "Грифиндор", "Красно-золотой");
         assertEquals(expectedFaculty, this.restTemplate.postForObject("http://localhost:"
                 + port + "/faculty", facultyForAdd, Faculty.class));
     }
 
     @Test
     void update_success() {
-        Faculty facultyForUpdate = new Faculty("Грифиндор", "Красно-золотой");
+        Faculty facultyForUpdate = new Faculty(1L, "Грифиндор", "Красно-золотой");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -72,7 +72,7 @@ class FacultyControllerTestRestTemplate {
 
     @Test
     void delete_success() {
-        Faculty facultyForDelete = new Faculty("Грифиндор", "Красно-золотой");
+        Faculty facultyForDelete = new Faculty(1L, "Грифиндор", "Красно-золотой");
         Faculty postedFaculty = this.restTemplate.postForObject(
                 "http://localhost:" + port + "/faculty", facultyForDelete, Faculty.class);
         this.restTemplate.delete(

@@ -21,8 +21,8 @@ public class FacultyServiceImpl implements FacultyService {
         this.studentService = studentService;
     }
     @Override
-    public Faculty add(String name, String color) {
-        Faculty newFaculty = new Faculty(name, color);
+    public Faculty add(Faculty faculty) {
+        Faculty newFaculty = new Faculty(faculty);
         newFaculty = facultyRepository.save(newFaculty);
         return newFaculty;
     }

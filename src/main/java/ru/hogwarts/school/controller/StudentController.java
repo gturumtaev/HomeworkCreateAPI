@@ -21,9 +21,8 @@ public class StudentController {
         return studentService.get(id);
     }
     @PostMapping
-    public Student add(@RequestParam String name,
-                       @RequestParam int age) {
-        return studentService.add(name, age);
+    public Student add(@RequestBody Student student) {
+        return studentService.add(student);
     }
     @PutMapping("{id}")
     public Student update(@PathVariable("id") Long id,

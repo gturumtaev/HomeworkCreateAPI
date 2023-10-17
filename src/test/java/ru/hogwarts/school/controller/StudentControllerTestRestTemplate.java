@@ -38,7 +38,7 @@ class StudentControllerTestRestTemplate {
 
     @Test
     void get_success() {
-        Student studentForAdd = new Student("Гарри Поттер", 11);
+        Student studentForAdd = new Student(1L, "Гарри Поттер", 11);
         Student postedStudent = this.restTemplate.postForObject("http://localhost:" + port + "/student", studentForAdd, Student.class);
         Student actualStudentOpt = this.restTemplate.getForObject("http://localhost:"
                 + port + "/student" + "?id=" + postedStudent.getId(), Student.class);
@@ -47,15 +47,15 @@ class StudentControllerTestRestTemplate {
 
     @Test
     void add_success() {
-        Student studentForAdd = new Student("Гарри Поттер", 11);
-        Student expectedStudent = new Student("Гарри Поттер", 11);
+        Student studentForAdd = new Student(1L,"Гарри Поттер", 11);
+        Student expectedStudent = new Student(1L,"Гарри Поттер", 11);
         assertEquals(expectedStudent, this.restTemplate.postForObject("http://localhost:"
                 + port + "/student", studentForAdd, Student.class));
     }
 
     @Test
     void update_success() {
-        Student studentForUpdate = new Student("Гарри Поттер", 11);
+        Student studentForUpdate = new Student(1L,"Гарри Поттер", 11);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -73,7 +73,7 @@ class StudentControllerTestRestTemplate {
 
     @Test
     void delete_success() {
-        Student studentForDelete = new Student("Гарри Поттер", 11);
+        Student studentForDelete = new Student(1L,"Гарри Поттер", 11);
         Student postedStudent = this.restTemplate.postForObject(
                 "http://localhost:" + port + "/student", studentForDelete, Student.class);
         this.restTemplate.delete(
