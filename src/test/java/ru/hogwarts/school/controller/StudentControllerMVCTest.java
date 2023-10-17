@@ -100,7 +100,7 @@ class StudentControllerMVCTest {
         Student student1 = new Student(1L, "Гарри Поттер", 11);
         Faculty faculty1 = new Faculty(1L,"Гриффиндор", "Красно-золотой");
         student1.setFaculty(faculty1);
-        when(studentRepository.findByFacultyId(any(Long.class))).thenReturn(Optional.of(student1));
+        when(studentRepository.findByFacultyId(any(Long.class))).thenReturn(List.of(student1));
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/student/faculty-by-student-id")
                         .param("id", "1")
