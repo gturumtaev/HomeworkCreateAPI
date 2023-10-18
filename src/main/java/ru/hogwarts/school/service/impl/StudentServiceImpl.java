@@ -2,6 +2,7 @@ package ru.hogwarts.school.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.entity.Faculty;
+import ru.hogwarts.school.entity.LastFiveStudent;
 import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.StudentService;
@@ -59,5 +60,17 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getByFacultyId(long facultyId) {
         return studentRepository.findByFacultyId(facultyId);
     }
+    @Override
+    public Integer getCountStudents() {
+        return studentRepository.getCountStudents();
+    }
+    @Override
+    public Double getAverageAgeStudents() {
+        return studentRepository.getAverageAgeStudents();
+    }
 
+    @Override
+    public List<LastFiveStudent> getLastFiveStudents() {
+        return studentRepository.getLastFiveStudents();
+    }
 }

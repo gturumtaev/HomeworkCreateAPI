@@ -1,5 +1,6 @@
 package ru.hogwarts.school.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class Avatar {
     private long fileSize;
 
     private String mediaType;
-
+    @JsonIgnore
     @Lob
     private byte[] data;
     @OneToOne

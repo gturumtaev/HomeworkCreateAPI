@@ -1,6 +1,7 @@
 package ru.hogwarts.school.service;
 
 import ru.hogwarts.school.entity.Faculty;
+import ru.hogwarts.school.entity.LastFiveStudent;
 import ru.hogwarts.school.entity.Student;
 
 import java.util.List;
@@ -22,4 +23,10 @@ public interface StudentService {
     List<Student> getByFacultyId(long id);
 
     Faculty getFacultyByStudentId(long id);
+
+    Integer getCountStudents();
+
+    Double getAverageAgeStudents();
+
+    List<LastFiveStudent> getLastFiveStudents();
 }

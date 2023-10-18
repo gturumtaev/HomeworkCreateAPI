@@ -1,4 +1,6 @@
 package ru.hogwarts.school.controller;
+import org.h2.mvstore.Page;
+import ru.hogwarts.school.entity.Avatar;
 import ru.hogwarts.school.service.AvatarService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @RestController
@@ -31,5 +34,10 @@ public class AvatarController {
     @GetMapping(value = "/student/{id}/avatar-from-file")
     public void downloadAvatarFromFileSystem(@PathVariable Long id, HttpServletResponse response) throws IOException{
         avatarService.downloadAvatarFromFileSystem(id, response);
+    }
+    @GetMapping("/avatar-page")
+    public List<Avatar> getAllAvatars(@RequestParam ("page") Integer pageNumber,
+                                      @RequestParam ("size") Integer sizePage) {
+        return avatarService.getAllAvatars(pageNumber, sizePage);
     }
 }

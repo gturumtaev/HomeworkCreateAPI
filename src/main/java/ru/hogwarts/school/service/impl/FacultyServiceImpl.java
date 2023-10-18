@@ -61,4 +61,6 @@ public class FacultyServiceImpl implements FacultyService {
     public List<Student> getStudentsByFacultyId(long id) {
         return studentService.getByFacultyId(id);
     }
+
+
 }

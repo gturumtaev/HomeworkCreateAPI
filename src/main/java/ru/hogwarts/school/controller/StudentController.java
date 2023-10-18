@@ -2,9 +2,11 @@ package ru.hogwarts.school.controller;
 
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.entity.Faculty;
+import ru.hogwarts.school.entity.LastFiveStudent;
 import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.service.StudentService;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @RestController
@@ -49,5 +51,17 @@ public class StudentController {
     @GetMapping("/faculty-by-student-id")
     public Faculty getFacultyByStudentId(@RequestParam Long id) {
         return studentService.getFacultyByStudentId(id);
+    }
+    @GetMapping("/count-students")
+    public Integer getCountStudents() {
+        return studentService.getCountStudents();
+    }
+    @GetMapping("/average-age-students")
+    public Double getAverageAgeStudents() {
+        return studentService.getAverageAgeStudents();
+    }
+    @GetMapping("/last-five-students")
+    public List<LastFiveStudent> getLastFiveStudent() {
+        return studentService.getLastFiveStudents();
     }
 }
