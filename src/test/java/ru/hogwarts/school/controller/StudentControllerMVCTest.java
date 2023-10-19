@@ -74,6 +74,7 @@ class StudentControllerMVCTest {
                 .andExpect(jsonPath("$.name").value(name))
                 .andExpect(jsonPath("$.age").value(age));
     }
+
     @Test
     void delete_success() throws Exception {
         Long id = 1L;
@@ -81,6 +82,7 @@ class StudentControllerMVCTest {
                 .andExpect(status().isOk());
         verify(studentRepository,times(1)).deleteById(id);
     }
+
     @Test
     void findStudents_success() throws Exception {
         int age = 11;
@@ -95,6 +97,7 @@ class StudentControllerMVCTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)));
         verify(studentRepository, times(1)).findByAge(age);
     }
+
     @Test
     void getFacultyByStudentId_success() throws Exception {
         Student student1 = new Student(1L, "Гарри Поттер", 11);

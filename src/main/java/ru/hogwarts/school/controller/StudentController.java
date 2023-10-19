@@ -22,20 +22,24 @@ public class StudentController {
     public Student get(@PathVariable("id") Long id) {
         return studentService.get(id);
     }
+
     @PostMapping
     public Student add(@RequestBody Student student) {
         return studentService.add(student);
     }
+
     @PutMapping("{id}")
     public Student update(@PathVariable("id") Long id,
                           @RequestParam String name,
                           @RequestParam int age) {
         return studentService.update(id, name, age);
     }
+
     @DeleteMapping("{id}")
     void delete(@PathVariable("id") Long id) {
         studentService.delete(id);
     }
+
     @GetMapping
     public List<Student> findStudents(@RequestParam(required = false) Integer age,
                                       @RequestParam(required = false) Integer min,
@@ -48,18 +52,22 @@ public class StudentController {
         }
         return studentService.getAllStudents();
     }
+
     @GetMapping("/faculty-by-student-id")
     public Faculty getFacultyByStudentId(@RequestParam Long id) {
         return studentService.getFacultyByStudentId(id);
     }
+
     @GetMapping("/count-students")
     public Integer getCountStudents() {
         return studentService.getCountStudents();
     }
+
     @GetMapping("/average-age-students")
     public Double getAverageAgeStudents() {
         return studentService.getAverageAgeStudents();
     }
+
     @GetMapping("/last-five-students")
     public List<LastFiveStudent> getLastFiveStudent() {
         return studentService.getLastFiveStudents();

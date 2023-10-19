@@ -76,6 +76,7 @@ class FacultyControllerMVCTest {
                 .andExpect(jsonPath("$.name").value(name))
                 .andExpect(jsonPath("$.color").value(color));
     }
+
     @Test
     void delete_success() throws Exception {
         Long id = 1L;
@@ -84,6 +85,7 @@ class FacultyControllerMVCTest {
                 .andExpect(status().isOk());
         verify(facultyRepository, times(1)).deleteById(id);
     }
+
     @Test
     void getFaculties_success() throws Exception {
         Faculty faculty = new Faculty(1L, "Гриффиндор", "Красно-золотой");
@@ -99,6 +101,7 @@ class FacultyControllerMVCTest {
                 .andExpect(jsonPath("$[0].color").value("Red"));
         verify(facultyService).getByColorIgnoreCase(color);
     }
+
     @Test
     void getByColorOrNameIgnoreCase_success() throws Exception {
         Faculty faculty1 = new Faculty(1L, "Гриффиндор", "Красно-золотой");

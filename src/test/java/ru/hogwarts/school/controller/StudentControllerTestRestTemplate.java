@@ -27,10 +27,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class StudentControllerTestRestTemplate {
     @LocalServerPort
     private int port;
+
     @Autowired
     private StudentController studentController;
+
     @Autowired
     private TestRestTemplate restTemplate;
+
     @Test
     void contextLoads() throws Exception {
         Assertions.assertThat(studentController).isNotNull();

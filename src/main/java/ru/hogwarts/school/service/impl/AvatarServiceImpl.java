@@ -69,6 +69,7 @@ public class AvatarServiceImpl implements AvatarService {
     private String getExtensions(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
+
     public ResponseEntity<byte[]> downloadAvatarByStudentFromDb(Long studentId) {
         Optional<Avatar> avatarOpt = avatarRepository.findByStudentId(studentId);
         if (avatarOpt.isEmpty()) {

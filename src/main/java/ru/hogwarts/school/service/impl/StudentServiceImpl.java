@@ -38,6 +38,7 @@ public class StudentServiceImpl implements StudentService {
     public void delete(long id) {
         studentRepository.deleteById(id);
     }
+
     @Override
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
@@ -52,18 +53,22 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findByAgeBetween(int min, int max) {
         return studentRepository.findByAgeBetween(min, max);
     }
+
     @Override
     public Faculty getFacultyByStudentId(long id) {
         return studentRepository.findById(id).get().getFaculty();
     }
+
     @Override
     public List<Student> getByFacultyId(long facultyId) {
         return studentRepository.findByFacultyId(facultyId);
     }
+
     @Override
     public Integer getCountStudents() {
         return studentRepository.getCountStudents();
     }
+
     @Override
     public Double getAverageAgeStudents() {
         return studentRepository.getAverageAgeStudents();

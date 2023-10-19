@@ -26,10 +26,12 @@ public class FacultyServiceImpl implements FacultyService {
         newFaculty = facultyRepository.save(newFaculty);
         return newFaculty;
     }
+
     @Override
     public Faculty get(long id) {
         return facultyRepository.findById(id).get();
     }
+
     @Override
     public Faculty update(long id, String name, String color) {
         Faculty facultyForUpdate = facultyRepository.findById(id).get();
@@ -37,10 +39,12 @@ public class FacultyServiceImpl implements FacultyService {
         facultyForUpdate.setColor(color);
         return facultyRepository.save(facultyForUpdate);
     }
+
     @Override
     public void delete(long id) {
         facultyRepository.deleteById(id);
     }
+
     @Override
     public List<Faculty> getAllFaculties() {
         return facultyRepository.findAll();
@@ -50,6 +54,7 @@ public class FacultyServiceImpl implements FacultyService {
     public List<Faculty> getByColorIgnoreCase(String color) {
         return facultyRepository.findByColorIgnoreCase(color);
     }
+
     @Override
     public Set<Faculty> getByColorOrNameIgnoreCase(String param) {
         Set<Faculty> result = new HashSet<>();
@@ -57,6 +62,7 @@ public class FacultyServiceImpl implements FacultyService {
         result.addAll(facultyRepository.findByNameIgnoreCase(param));
         return result;
     }
+
     @Override
     public List<Student> getStudentsByFacultyId(long id) {
         return studentService.getByFacultyId(id);
