@@ -6,7 +6,6 @@ import ru.hogwarts.school.entity.LastFiveStudent;
 import ru.hogwarts.school.entity.Student;
 import ru.hogwarts.school.service.StudentService;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @RestController
