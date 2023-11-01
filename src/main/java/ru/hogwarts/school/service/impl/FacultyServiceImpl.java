@@ -82,4 +82,22 @@ public class FacultyServiceImpl implements FacultyService {
         logger.debug("Was invoked method for get the students by faculty id");
         return studentService.getByFacultyId(id);
     }
+
+    @Override
+    public String longestFacultyName() {
+        logger.info("Was invoked method for longest faculty name");
+        return facultyRepository.findAll()
+                .stream()
+                .max((f1, f2) -> f1.getName().length() - f2.getName().length())
+                .toString();
+    }
+
+    @Override
+    public Integer sumExample() {
+        logger.info("Was invoked method for calculation sum");
+        Integer sum = Stream.iterate(1, a -> a + 1)
+                .limit(1_000_000)
+                .reduce(0, Integer::sum);
+        return sum;
+    }
 }
