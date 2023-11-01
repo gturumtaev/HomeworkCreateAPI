@@ -23,5 +23,7 @@ public interface FacultyService {
 
     List<Student> getStudentsByFacultyId(long id);
 
+    String longestFacultyName();
 
+    Integer sumExample();
 }

@@ -4,6 +4,7 @@ import ru.hogwarts.school.entity.Faculty;
 import ru.hogwarts.school.entity.LastFiveStudent;
 import ru.hogwarts.school.entity.Student;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface StudentService {
@@ -29,4 +30,8 @@ public interface StudentService {
     Double getAverageAgeStudents();
 
     List<LastFiveStudent> getLastFiveStudents();
+
+    Collection<String> studentsNameStartWithA();
+
+    Double getAverageAgeStudents2();
 }
