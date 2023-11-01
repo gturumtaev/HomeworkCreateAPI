@@ -31,7 +31,4 @@ public interface StudentService {
 
     List<LastFiveStudent> getLastFiveStudents();
 
-    Collection<String> studentsNameStartWithA();
-
-    Double getAverageAgeStudents2();
 }
