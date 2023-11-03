@@ -82,4 +82,13 @@ public class StudentController {
     public Double getAverageAgeStudents2() {
         return studentService.getAverageAgeStudents2();
     }
+
+    @GetMapping("/get-students-streams")
+    public void getNamesStudents() {
+        studentService.getAllStudents2();
+    }
+    @GetMapping("/get-students-streams2")
+    public void getNamesStudents2() {
+        studentService.getAllStudents3();
+    }
 }

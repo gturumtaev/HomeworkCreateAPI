@@ -121,4 +121,45 @@ public class StudentServiceImpl implements StudentService {
                 .average()
                 .orElse(0.0);
     }
+
+    @Override
+    public void getAllStudents2() {
+        System.out.println("_______________");
+        getNamesStudents(0);
+        getNamesStudents(1);
+
+        new Thread(() -> {
+            getNamesStudents(2);
+            getNamesStudents(3);
+        }).start();
+
+        new Thread(() -> {
+            getNamesStudents(4);
+            getNamesStudents(5);
+        }).start();
+
+    }
+    @Override
+    public synchronized void getAllStudents3() {
+        System.out.println("_______________");
+        getNamesStudents(0);
+        getNamesStudents(1);
+
+        new Thread(() -> {
+            getNamesStudents(2);
+            getNamesStudents(3);
+        }).start();
+
+        new Thread(() -> {
+            getNamesStudents(4);
+            getNamesStudents(5);
+        }).start();
+
+    }
+
+    @Override
+    public void getNamesStudents(int number) {
+        List<Student> students = studentRepository.findAll();
+        System.out.println(students.get(number).getName());
+    }
 }

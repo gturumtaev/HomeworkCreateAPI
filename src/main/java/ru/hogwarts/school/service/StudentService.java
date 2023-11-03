@@ -34,4 +34,10 @@ public interface StudentService {
     Collection<String> studentsNameStartWithA();
 
     Double getAverageAgeStudents2();
+
+    void getAllStudents2();
+
+    void getAllStudents3();
+
+    void getNamesStudents(int number);
 }
